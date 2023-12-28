@@ -1,8 +1,9 @@
 const express = require('express');
 const path = require('path');
 const { connection } = require('./config/db');
+const { userRouter } = require("./routes/user.route");
 
-require('dotenv').config();
+require("dotenv").config();
 
 const port = process.env.PORT || 5000;
 
@@ -12,10 +13,12 @@ app.use(express.json());
 
 app.use(express.urlencoded({ extended: true }));
 
+app.get("/", (req, res) => {
+  res.send("hello");
+});
 
-app.get("/",(req,res) => {
-    res.send("hello")
-})
+app.use("/auth", userRouter);
+
 
 app.listen(port, async ()=>{
     try {
