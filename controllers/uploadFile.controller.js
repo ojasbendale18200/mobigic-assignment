@@ -27,7 +27,9 @@ const getFiles = async (req, res) => {
 const postFile = async (req, res) => {
   try {
     const filename = req.file.filename;
-    const cloudinaryResult = await cloudinary.uploader.upload(req.file.path);
+    const cloudinaryResult = await cloudinary.uploader.upload(req.file.path, {
+      resource_type: "auto",
+    });
 
     const upload = new Upload({
       filename,
