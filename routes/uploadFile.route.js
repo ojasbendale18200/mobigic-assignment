@@ -50,6 +50,6 @@ uploadedFileRouter.get("/:id", getFile);
 
 uploadedFileRouter.delete("/delete/:id", deleteFile);
 
-uploadedFileRouter.get("/download", downloadFile);
+uploadedFileRouter.get("/download/:fileId", downloadFile);
 
 module.exports = { uploadedFileRouter };

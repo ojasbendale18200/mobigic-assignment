@@ -97,10 +97,14 @@ const deleteFile = async (req, res) => {
 const downloadFile = async (req, res) => {
   try {
     const userId = req.user;
-    const fileId = req.body.fileId;
-    const code = req.body.code;
+    const fileId = req.params.fileId;
+    const code = req.query.code;
 
-    const file = await File.findOne({ _id: fileId, user: userId });
+    const file = await Upload.findOne({ _id: fileId, user: userId });
+
+    console.log(file);
+    console.log(code);
+
     if (!file) {
       return res.status(404).json({ error: "File not found" });
     }
@@ -109,7 +113,8 @@ const downloadFile = async (req, res) => {
       return res.status(401).json({ error: "Invalid access code" });
     }
 
-    const filePath = path.join(pathfile, "../uploads/", file.filename);
+    const filePath = path.join(pathfile, "uploadedfiles", file.filename);
+
     res.download(filePath, file.originalname);
   } catch (error) {
     console.error(error);
