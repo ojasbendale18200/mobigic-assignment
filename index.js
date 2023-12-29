@@ -1,11 +1,12 @@
 const express = require('express');
 const path = require('path');
+require("dotenv").config();
 const { connection } = require('./config/db');
 const { userRouter } = require("./routes/user.route");
 const { authenticate } = require("./middleware/auth.middleware");
 const { uploadedFileRouter } = require("./routes/uploadFile.route");
 const cloudinary = require("cloudinary").v2;
-require("dotenv").config();
+
 const cors = require("cors");
 
 const port = process.env.PORT || 5000;
